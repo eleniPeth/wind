@@ -1,7 +1,6 @@
 import time
 from controller import PIController, get_pwr_target
 import hardware as helpers
-from parse import  get_last_wind_speed
 import csv
 
 R1 = 100e3   # top resistor (Ω)
