@@ -7,10 +7,9 @@ import csv
 _spi = None
 _pwm = None
 
-R1 = 100e3   # top resistor (Ω)
-R2 =  10e3   # bottom resistor (Ω)
-DIV_INV = 1.0
-#(R1 + R2) / R2
+R1 = 230   # top resistor (Ω)
+R2 =  10   # bottom resistor (Ω)
+DIV_INV = (R1 + R2) / R2
 
 
 
@@ -41,6 +40,11 @@ def read_voltage(channel, vref=5.0):
     raw = _read_channel(channel)  
     return (raw / 4095.0) * vref
 
+def read_current(channel, vref=5.0):
+    adc_value = _read_channel(channel)
+    current = (adc_value) * (vref/(4095 * 0.0625))
+    return current
+    
 
 def shutdown():
     """
@@ -68,6 +72,7 @@ try:
         # Reading
         measured_vout = read_voltage(channel=1, vref=5.0) * DIV_INV
         vin = read_voltage(channel=2, vref=5.0) * DIV_INV
+        current = helpers.read_current(channel=3, vref=5.0) * DIV_INV
 
             
             
