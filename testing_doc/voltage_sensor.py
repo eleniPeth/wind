@@ -1,3 +1,5 @@
+#code to measure voltage and currebt
+
 import spidev
 import RPi.GPIO as GPIO
 import time
